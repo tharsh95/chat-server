@@ -17,9 +17,13 @@ io.on("connection", (socket) => {
   socket.on("join", (data) => {
       socket.join(data.room)
     });
-    
+
+
     socket.on("send", (data) => {
       io.to(data.room).emit("receive",data);
+    });
+    socket.on("disconnect", () => {
+      console.log(`Socket disconnected: ${socket.id}`);
     });
 });
 
